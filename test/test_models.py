@@ -8,4 +8,4 @@ class TestActor(TestCase):
 
 class TestUser(TestCase):
     def test_user(self):
-        pass
+        users = Users.objects.all()
