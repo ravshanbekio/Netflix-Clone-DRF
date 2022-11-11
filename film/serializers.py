@@ -10,7 +10,7 @@ class ActorSerializer(ModelSerializer):
     def validate_name(self, value):
         if len(value) < 5:
             raise APIException("Ism juda qisqa")
-        return value
+        return value    
 
 class MovieSerializer(ModelSerializer):
     class Meta:

@@ -5,6 +5,7 @@ from .serializers import *
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
+from rest_framework.throttling import ScopedRateThrottle
 
 class Hello(APIView):
     def get(self, request):
@@ -116,13 +117,22 @@ class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'film'
+
 class UserViewSet(ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UserSerializer
 
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'film'
+
 class MovieViewSet(ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'film'
 
     @action(detail=True, methods=["GET", "POST"])
     def aktor(self, request, pk):
@@ -139,3 +149,6 @@ class MovieViewSet(ModelViewSet):
 class ActorViewSet(ModelViewSet):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'film'
